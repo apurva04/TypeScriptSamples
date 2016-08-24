@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+	</head>
+<body>
+<script>
+debugger;
+    var app = angular.module("app", []);
+
+    app.directive('adult', function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attributes, control) {
+			
+                control.$validators.adult = function (modelValue, viewValue) {
+
+                    if (control.$isEmpty(modelValue)) // if empty, correct value
+                    {
+                        return true;
+                    }
+                    
+                    var age = viewValue;
+					//alert("age"+age);
+				//	var myVar = age.search(',');
+					age=age.replace (/,/g, "");
+					//if(myVar<0){
+								b="";
+								var x=age;
+								var i=0;
+								while(x>1){
+								//alert(x);
+								//alert(x);
+								  i++;
+								 
+								  r=x%10;
+								  //alert(r);
+								  b=b+r;
+								  //alert(b);
+								  if((x/10)==0){
+								  break;
+								  }
+								  if(i==3){
+									i=0;
+									b=b+',';
+								  }
+								  x=Math.floor(x/10);
+								//alert(x);
+								}
+								b=b+x;
+
+								var splitString = b.split("");
+								var reverseArray = splitString.reverse();
+								var joinArray = reverseArray.join("");
+							//	alert("join"+joinArray);
+										
+								
+								
+						
+								
+								
+							   
+								
+									 control.$setViewValue(joinArray);
+									
+									 control.$render();
+								
+									 return true;
+					//}
+                    
+                    
+                };
+            }
+        };
+    });
+
+    
+</script>
+<div ng-app="app">
+    
+        <b>Currency</b>: <input type="text" name="txtAge" ng-model="age" adult />
+        
+        <hr />
+       
+   
+</div>
+</body>
+</html>
